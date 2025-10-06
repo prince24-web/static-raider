@@ -16,7 +16,7 @@ export const metadata = {
   description:
     "Static Raider is an AI-powered web scraping tool that extracts website content and transforms it with intelligent summaries, explanations, and insights.",
     icons: {
-    icon: "/spider-icon1.jpg", // path from public folder
+    icon: "/spider.jpg", // path from public folder
   },
   keywords: [
     "web scraping",
@@ -37,7 +37,7 @@ export const metadata = {
     siteName: "Static Raider",
     images: [
       {
-        url: "/spider-1.png",
+        url: "/spider.jpg",
         width: 1200,
         height: 630,
         alt: "Static Raider – AI Web Scraping Tool",
@@ -51,7 +51,7 @@ export const metadata = {
     title: "Static Raider — AI Web Scraping Tool",
     description:
       "Extract and summarize any webpage with AI. Built with Next.js and Gemini.",
-    images: ["/spider-icon1.png"],
+    images: ["/spider.jpg"],
     creator: "@Devprinze", // replace with your actual X handle
   },
   themeColor: "#ffffff",
