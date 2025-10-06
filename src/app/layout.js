@@ -12,9 +12,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Static Raider — AI Web Scraping Tool",
+  title: "Static Raider - AI Web Scraping Tool",
   description:
     "Static Raider is an AI-powered web scraping tool that extracts website content and transforms it with intelligent summaries, explanations, and insights.",
+    icons: {
+    icon: "/spider-icon1.jpg", // path from public folder
+  },
   keywords: [
     "web scraping",
     "AI tool",
@@ -30,11 +33,11 @@ export const metadata = {
     title: "Static Raider — AI Web Scraping Tool",
     description:
       "Scrape, analyze, and understand any webpage using AI. Powered by Gemini and built with Next.js.",
-    url: "https://staticraider.vercel.app",
+    url: "https://static-raider.vercel.app",
     siteName: "Static Raider",
     images: [
       {
-        url: "/og-image.png",
+        url: "/spider-1.png",
         width: 1200,
         height: 630,
         alt: "Static Raider – AI Web Scraping Tool",
@@ -48,7 +51,7 @@ export const metadata = {
     title: "Static Raider — AI Web Scraping Tool",
     description:
       "Extract and summarize any webpage with AI. Built with Next.js and Gemini.",
-    images: ["/og-image.png"],
+    images: ["/spider-icon1.png"],
     creator: "@Devprinze", // replace with your actual X handle
   },
   themeColor: "#ffffff",

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Loader2, Send } from "lucide-react";
+import { Icon, Loader2, Send} from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 export default function Home() {
@@ -32,51 +32,119 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#f8fafc] relative flex flex-col items-center px-6 py-10 text-black">
-      {/* Top Fade Grid Background */}
+    <div className="min-h-screen w-full bg-[#fafafa] relative flex flex-col items-center px-6 py-12 text-black">
+      {/* Soft Grid Background */}
       <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+            linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+            linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
           `,
-          backgroundSize: "20px 30px",
+          backgroundSize: "22px 30px",
           WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+            "radial-gradient(ellipse 65% 60% at 50% 0%, #000 60%, transparent 100%)",
           maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+            "radial-gradient(ellipse 65% 60% at 50% 0%, #000 60%, transparent 100%)",
         }}
       />
 
-      {/* Content Wrapper (for z-index stacking) */}
-      <div className="relative z-10 w-full flex flex-col items-center">
-        {/* Header */}
-        <header className="w-full max-w-2xl border-b border-black/10 pb-4 mb-10">
-          <h1 className="text-3xl font-semibold tracking-tight">Static Raider</h1>
-          <p className="text-gray-600 mt-1 text-sm">
-            Paste a link and tell the AI what to do with it.
+    
+        {/* Navbar */}
+      <nav className="relative z-10 w-full max-w-5xl flex items-center justify-between py-4 mb-10 border-b border-black/10">
+     <div className="flex items-center gap-2">
+      <img 
+        src="/spidey-icon.png" 
+        alt="Spidey Icon" 
+        width={34} 
+        height={34} 
+        className="object-contain"
+      />
+      <h1 className="text-lg font-semibold tracking-tight">Static Raider</h1>
+    </div>
+
+
+        <div className="flex items-center gap-4 text-gray-600">
+          <a
+            href="https://x.com/Devprinze"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black transition"
+            aria-label="Twitter"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 3a4.48 4.48 0 00-4.47 4.48c0 .35.04.7.11 1.03A12.94 12.94 0 013 4.1s-4 9 5 13a13 13 0 01-8 2c9 5.5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+            </svg>
+          </a>
+
+          <a
+            href="https://github.com/prince24-web/static-raider"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black transition"
+            aria-label="GitHub"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.76c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 21.13V25" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="relative z-10 w-full max-w-2xl flex flex-col items-center">
+        {/* Header Section */}
+        <header className="text-center mb-10">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            Web Intelligence. Simplified.
+          </h2>
+          <p className="text-gray-600 mt-2 text-sm max-w-md">
+            Paste a link, add your prompt, and let AI extract insights instantly.
           </p>
         </header>
 
         {/* Form Container */}
-        <div className="w-full max-w-2xl space-y-4 bg-white p-9 rounded-2xl shadow-[0_6px_30px_rgba(0,0,0,0.08)] transition-all">
+        <div className="w-full space-y-5 bg-white/90 backdrop-blur-sm p-9 rounded-2xl border border-black/10 shadow-[0_6px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
           <div>
-            <label className="block text-sm font-medium mb-1">Website URL</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">
+              Website URL
+            </label>
             <input
               type="text"
               placeholder="https://example.com"
-              className="w-full border border-black/10 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black text-sm"
+              className="w-full border border-black/10 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black text-sm bg-white"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Prompt</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">
+              Prompt
+            </label>
             <textarea
               placeholder="e.g. Summarize this article in 3 bullet points"
-              className="w-full border border-black/10 rounded-lg px-3 py-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-black text-sm"
+              className="w-full border border-black/10 rounded-lg px-3 py-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-black text-sm bg-white"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
@@ -93,15 +161,21 @@ export default function Home() {
         </div>
 
         {/* Result Box */}
-        {result && (
-          <div className="w-full max-w-2xl mt-10 border border-black/10 rounded-xl p-6 bg-white shadow-[0_6px_30px_rgba(0,0,0,0.08)]">
-            <h2 className="text-lg font-semibold mb-2">AI Response</h2>
-            <div className="prose max-w-none text-gray-800 text-sm leading-relaxed">
-              <ReactMarkdown>{result}</ReactMarkdown>
-            </div>
+       {result && (
+        <div className="w-full mt-10 border border-black/10 rounded-xl p-6 bg-white shadow-[0_6px_30px_rgba(0,0,0,0.06)]">
+          <h2 className="text-lg font-semibold mb-2">AI Response</h2>
+          <div className="prose max-w-none text-gray-800 text-sm leading-relaxed">
+            <ReactMarkdown>{result}</ReactMarkdown>
           </div>
-        )}
+        </div>
+      )}
+
       </div>
+
+      {/* Footer */}
+      <footer className="relative z-10 mt-16 text-xs text-gray-500">
+        © {new Date().getFullYear()} Static Raider • built for exploration
+      </footer>
     </div>
   );
 }
