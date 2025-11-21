@@ -1,7 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Icon, Loader2, Send} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Icon, Loader2, Send, Download } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import jsPDF from "jspdf";
+import { toPng } from "html-to-image";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -9,6 +11,7 @@ export default function Home() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const resultRef = useRef(null);
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -31,6 +34,22 @@ export default function Home() {
     setLoading(false);
   };
 
+  const handleDownloadPDF = async () => {
+    if (!resultRef.current) return;
+    try {
+      const dataUrl = await toPng(resultRef.current, { cacheBust: true });
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const imgProps = pdf.getImageProperties(dataUrl);
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("static-raider-result.pdf");
+    } catch (err) {
+      console.error("PDF generation failed", err);
+      alert("Failed to generate PDF");
+    }
+  };
+
   return (
     <div className="min-h-screen w-full bg-[#fafafa] relative flex flex-col items-center px-6 py-12 text-black">
       {/* Soft Grid Background */}
@@ -49,19 +68,19 @@ export default function Home() {
         }}
       />
 
-    
-        {/* Navbar */}
+
+      {/* Navbar */}
       <nav className="relative z-10 w-full max-w-5xl flex items-center justify-between py-4 mb-10 border-b border-black/10">
-     <div className="flex items-center gap-2">
-      <img 
-        src="/spidey-icon.png" 
-        alt="Spidey Icon" 
-        width={34} 
-        height={34} 
-        className="object-contain"
-      />
-      <h1 className="text-lg font-semibold tracking-tight">Static Raider</h1>
-    </div>
+        <div className="flex items-center gap-2">
+          <img
+            src="/spidey-icon.png"
+            alt="Spidey Icon"
+            width={34}
+            height={34}
+            className="object-contain"
+          />
+          <h1 className="text-lg font-semibold tracking-tight">Static Raider</h1>
+        </div>
 
 
         <div className="flex items-center gap-4 text-gray-600">
@@ -161,14 +180,23 @@ export default function Home() {
         </div>
 
         {/* Result Box */}
-       {result && (
-        <div className="w-full mt-10 border border-black/10 rounded-xl p-6 bg-white shadow-[0_6px_30px_rgba(0,0,0,0.06)]">
-          <h2 className="text-lg font-semibold mb-2">AI Response</h2>
-          <div className="prose max-w-none text-gray-800 text-sm leading-relaxed">
-            <ReactMarkdown>{result}</ReactMarkdown>
+        {result && (
+          <div className="w-full mt-10 border border-black/10 rounded-xl p-6 bg-white shadow-[0_6px_30px_rgba(0,0,0,0.06)]">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">AI Response</h2>
+              <button
+                onClick={handleDownloadPDF}
+                className="flex items-center gap-2 text-xs font-medium text-gray-500 hover:text-black transition bg-gray-50 px-3 py-1.5 rounded-md border border-gray-200"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
+            </div>
+            <div ref={resultRef} className="prose max-w-none text-gray-800 text-sm leading-relaxed p-2">
+              <ReactMarkdown>{result}</ReactMarkdown>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       </div>
 
